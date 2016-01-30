@@ -1,6 +1,8 @@
 FROM rails:4
 MAINTAINER gordon.burgett@gmail.com
 
+RUN apt-get update
+
 # we need nginx
 COPY install_nginx.sh install_nginx.sh
 RUN /bin/bash install_nginx.sh && rm install_nginx.sh
@@ -24,8 +26,8 @@ RUN RAILS_ENV=production SECRET_KEY_BASE='foo' bin/rake assets:precompile
 # expose the nginx port
 EXPOSE 8080
 
-# create a volume so we can get at the logs later if we need to
-VOLUME /var/log/engine
+# create a volume for the sites
+VOLUME /engine/public/sites
 
 # copy all the config files into the image
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
@@ -33,4 +35,4 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY config config
 
 # start by running supervisord
-CMD ["/usr/bin/supervisord"]
+ENTRYPOINT ["/usr/bin/supervisord"]
