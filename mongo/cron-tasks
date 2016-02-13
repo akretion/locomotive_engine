@@ -1,0 +1,2 @@
+* * * * * root /tasks/restore.sh >> /var/log/restore.log 2>&1
+0 0 * * * root /tasks/backup.sh >> /var/log/backup.log 2>&1

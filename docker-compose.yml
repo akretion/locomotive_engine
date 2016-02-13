@@ -8,7 +8,18 @@ engine:
   links:
    - db
   volumes:
-   - /tmp/log/engine/:/var/log/engine/
+   - /var/backup/sites/:/var/backup/sites/
 
 db:
-  image: mongo:3
+  build: mongo/
+  volumes: 
+   - /var/backup/db/:/var/backup/db/
+
+volumes:
+  image: gordonburgett/backup-volume-container
+  environment:
+    AWS_ACCESS_KEY_ID: AKIAJMKYHOIYBNLPSWSQ
+    AWS_SECRET_ACCESS_KEY: foo
+  volumes:
+    - /var/backup/:/var/backup/
+  command: "s3://s3.amazonaws.com/gordonburgett.net/backup/test 30"
