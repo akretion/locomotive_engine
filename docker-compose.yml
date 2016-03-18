@@ -2,7 +2,7 @@
 engine:
   build: engine/
   ports:
-   - "8080:8080"
+   - "80:80"
   environment:
     SECRET_KEY_BASE: b4b3d994f915c60b5b3b05a2f2665039b9d6d20468ca302910ac46e245fbcb4ba7812371393e0b3161d6c6f215686737c7d68077556c6308f9afc3f0defb4873
   links:

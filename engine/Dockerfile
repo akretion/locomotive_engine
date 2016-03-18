@@ -24,7 +24,7 @@ RUN bundle install --path vendor/bundle && \
 RUN RAILS_ENV=production SECRET_KEY_BASE='foo' bin/rake assets:precompile
 
 # expose the nginx port
-EXPOSE 8080
+EXPOSE 80
 
 # create a volume for the sites
 VOLUME /engine/public/sites
